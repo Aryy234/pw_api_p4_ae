@@ -1,6 +1,6 @@
 package uce.edu.ec.api.representation;
 
-import java.util.Date;
+import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
 import uce.edu.ec.api.domain.Vehiculo;
@@ -12,8 +12,8 @@ public class VehiculoRepresentation {
     private String marca;
     private String modelo;
     private String chasis;
-    private Date fechaFabricacion;
-    private Date fechaMatricula;
+    private LocalDate fechaFabricacion;
+    private LocalDate fechaMatricula;
 
     // Convertir de VehiculoRepresentation a Vehiculo
     public Vehiculo toEntity() {
@@ -24,10 +24,10 @@ public class VehiculoRepresentation {
         vehiculo.setChasis(this.chasis);
         
         if (this.fechaFabricacion != null) {
-            vehiculo.setFechaFabricacion(new java.sql.Date(this.fechaFabricacion.getTime()));
+            vehiculo.setFechaFabricacion(java.sql.Date.valueOf(this.fechaFabricacion));
         }
         if (this.fechaMatricula != null) {
-            vehiculo.setFechaMatricula(new java.sql.Date(this.fechaMatricula.getTime()));
+            vehiculo.setFechaMatricula(java.sql.Date.valueOf(this.fechaMatricula));
         }
         
         return vehiculo;
@@ -42,10 +42,10 @@ public class VehiculoRepresentation {
         representation.setChasis(vehiculo.getChasis());
         
         if (vehiculo.getFechaFabricacion() != null) {
-            representation.setFechaFabricacion(new Date(vehiculo.getFechaFabricacion().getTime()));
+            representation.setFechaFabricacion(vehiculo.getFechaFabricacion().toLocalDate());
         }
         if (vehiculo.getFechaMatricula() != null) {
-            representation.setFechaMatricula(new Date(vehiculo.getFechaMatricula().getTime()));
+            representation.setFechaMatricula(vehiculo.getFechaMatricula().toLocalDate());
         }
         
         return representation;
