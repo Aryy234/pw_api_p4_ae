@@ -4,9 +4,11 @@ import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -47,10 +49,10 @@ public class VehiculoResource {
         return Response.ok(representaciones).build();
     }
 
-    @Path("/eliminar/{id}")
-    @POST
+    @Path("/{id}")
+    @DELETE
     @RolesAllowed({"admin"})
-    public Response eliminarVehiculo(Long id) {
+    public Response eliminarVehiculo(@PathParam("id") Long id) {
         vehiculoService.eliminarVehiculo(id);
         return Response.ok("Vehículo eliminado exitosamente").build();
     }
