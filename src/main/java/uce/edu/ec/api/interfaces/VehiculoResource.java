@@ -47,4 +47,12 @@ public class VehiculoResource {
         return Response.ok(representaciones).build();
     }
 
+    @Path("/eliminar/{id}")
+    @POST
+    @RolesAllowed({"admin"})
+    public Response eliminarVehiculo(Long id) {
+        vehiculoService.eliminarVehiculo(id);
+        return Response.ok("Vehículo eliminado exitosamente").build();
+    }
+
 }

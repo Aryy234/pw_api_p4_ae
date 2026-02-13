@@ -19,6 +19,11 @@ public class VehiculoService {
         vehiculoRepository.persist(vehiculo);
     }
 
+    @Transactional
+    public void eliminarVehiculo(Long id) {
+        vehiculoRepository.deleteById(id);
+    }
+
     public List<Vehiculo> listarVehiculos() {
         return vehiculoRepository.listAll();
     }
